@@ -65,9 +65,9 @@ class TestTax(AccountTestInvoicingCommon):
             .search(
                 [
                     (
-                        "user_type_id",
+                        "account_type",
                         "=",
-                        cls.env.ref("account.data_account_type_current_assets").id,
+                        "asset_current",
                     )
                 ],
                 limit=1,
@@ -79,9 +79,9 @@ class TestTax(AccountTestInvoicingCommon):
             .search(
                 [
                     (
-                        "user_type_id",
+                        "account_type",
                         "=",
-                        cls.env.ref("account.data_account_type_current_liabilities").id,
+                        "liability_current",
                     )
                 ],
                 limit=1,
@@ -124,7 +124,7 @@ class TestTax(AccountTestInvoicingCommon):
                 "code": "VAT AUTH",
                 "name": "VAT Authority",
                 "reconcile": True,
-                "user_type_id": cls.env.ref("account.data_account_type_payable").id,
+                "account_type": "liability_payable",
             }
         )
 
@@ -152,9 +152,9 @@ class TestTax(AccountTestInvoicingCommon):
             .search(
                 [
                     (
-                        "user_type_id",
+                        "account_type",
                         "=",
-                        self.env.ref("account.data_account_type_revenue").id,
+                        "income",
                     )
                 ],
                 limit=1,
