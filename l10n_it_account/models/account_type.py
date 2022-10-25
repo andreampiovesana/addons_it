@@ -39,31 +39,24 @@ class AccountAccount(models.Model):
         if any(t.account_balance_sign not in (-1, 1) for t in self):
             raise ValidationError(_("Balance sign's value can only be 1 or -1."))
 
-    # @api.constrains("account_balance_sign")
-    # def check_balance_sign_coherence(self):
-    #     """
-    #     Checks whether changes upon `account_balance_sign` create incoherencies
-    #     in account groups' balance signs.
-    #     """
-    #     # Force check upon sign itself before checking groups signs coherence
-    #     self.check_balance_sign_value()
-    #     acc_obj = self.env["account.account"]
-    #     for account_type in self:
-    #        accounts = acc_obj.search([("user_type_id", "=", account_type.id)])
-    #        # Avoid check upon empty recordset to make it faster
-    #        if accounts:
-    #            accounts.check_balance_sign_coherence()
-
-    def have_same_sign(self):
+    @api.constrains("account_balance_sign")
+    def check_balance_sign_coherence(self):
         """
-        Checks types' signs.
-        :return: True if there's nothing to check or there's only one type
-        to check; else, returns True or False according to whether every
-        type has the same value for `account_balance_sign` (if it's not 0).
+        Checks whether changes upon `account_balance_sign` create incoherencies
+        in account groups' balance signs.
         """
-        # to_check = self.filtered(lambda t: t.account_balance_sign)
-        # if len(to_check) <= 1:
-        #     return True
-        # benchmark = to_check[0].account_balance_sign
-        # return all(t.account_balance_sign == benchmark for t in to_check)
-        return True
+        # Force check upon sign itself before checking groups signs coherence
+        acc_obj = self.env["account.account"]
+        key_val_dict = dict(self._fields['account_type'].selection)
+        for key, val in key_val_dict.items():
+            if key in ACCOUNT_TYPES_NEGATIVE_SIGN:
+                sign = -1
+            else:
+                sign = 1
+            accounts = acc_obj.search(
+                [("account_type", "=", key),
+                 ("account_balance_sign", "!=", sign)],
+            )
+            # Avoid check upon empty recordset to make it faster
+            if accounts:
+                raise ValidationError(_("Balance sign's not coerent"))
