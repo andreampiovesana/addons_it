@@ -147,7 +147,7 @@ class TestAccount(AccountTestInvoicingCommon):
             {
                 "name": "it_account_1",
                 "code": "it_account_1",
-                #"user_type_id": self.data_account_type_current_assets.id,
+                "account_type": "asset_current",
             }
         )
         with self.assertRaises(ValidationError):
@@ -155,7 +155,7 @@ class TestAccount(AccountTestInvoicingCommon):
                 {
                     "name": "it_account_2",
                     "code": "it_account_2",
-                    #"user_type_id": self.data_account_type_current_liabilities.id,
+                    "account_type": "liability_current",
                 }
             )
 
