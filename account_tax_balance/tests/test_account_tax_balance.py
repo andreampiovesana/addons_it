@@ -50,9 +50,7 @@ class TestAccountTaxBalance(HttpCase):
                 {
                     "name": "Tax Paid",
                     "code": "TAXTEST",
-                    #"user_type_id": self.env.ref(
-                    #    "account.data_account_type_current_liabilities"
-                    #).id,
+                    "account_type": "liability_current"
                 }
             )
             .id
@@ -64,11 +62,9 @@ class TestAccountTaxBalance(HttpCase):
             self.env["account.account"]
             .create(
                 {
-                    #"user_type_id": self.env.ref(
-                    #    "account.data_account_type_expenses"
-                    #).id,
                     "code": "EXPTEST",
                     "name": "Test expense account",
+                    "account_type": "liability_current"
                 }
             )
             .id

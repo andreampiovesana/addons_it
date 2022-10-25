@@ -101,9 +101,9 @@ class TestDeclarationOfIntent(AccountTestInvoicingCommon):
         cls.a_sale = cls.env["account.account"].search(
             [
                 (
-                    "user_type_id",
+                    "account_type",
                     "=",
-                    cls.env.ref("account.data_account_type_revenue").id,
+                    "income",
                 )
             ],
             limit=1,
@@ -111,9 +111,9 @@ class TestDeclarationOfIntent(AccountTestInvoicingCommon):
         cls.a_cost = cls.env["account.account"].search(
             [
                 (
-                    "user_type_id",
+                    "account_type",
                     "=",
-                    cls.env.ref("account.data_account_type_direct_costs").id,
+                    "direct_costs",
                 )
             ],
             limit=1,

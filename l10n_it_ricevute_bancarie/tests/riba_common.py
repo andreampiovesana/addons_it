@@ -9,10 +9,6 @@ class TestRibaCommon(common.TransactionCase):
         self.move_line_model = self.env["account.move.line"]
         self.move_model = self.env["account.move"]
         self.distinta_model = self.env["riba.distinta"]
-        self.account_user_type = self.env.ref("account.data_account_type_receivable")
-        self.account_asset_user_type = self.env.ref(
-            "account.data_account_type_fixed_assets"
-        )
         self.partner = self.env.ref("base.res_partner_3")
         self.partner.vat = "IT01234567890"
         self.product1 = self.env.ref("product.product_product_5")
@@ -28,16 +24,16 @@ class TestRibaCommon(common.TransactionCase):
             dict(
                 code="cust_acc",
                 name="customer account",
-                user_type_id=self.account_user_type.id,
+                account_type="asset_receivable",
                 reconcile=True,
             )
         )
         self.sale_account = self.env["account.account"].search(
             [
                 (
-                    "user_type_id",
+                    "account_type",
                     "=",
-                    self.env.ref("account.data_account_type_revenue").id,
+                    "income",
                 )
             ],
             limit=1,
@@ -45,9 +41,9 @@ class TestRibaCommon(common.TransactionCase):
         self.expenses_account = self.env["account.account"].search(
             [
                 (
-                    "user_type_id",
+                    "account_type",
                     "=",
-                    self.env.ref("account.data_account_type_expenses").id,
+                    "expense",
                 )
             ],
             limit=1,
@@ -55,9 +51,9 @@ class TestRibaCommon(common.TransactionCase):
         self.bank_account = self.env["account.account"].search(
             [
                 (
-                    "user_type_id",
+                    "account_type",
                     "=",
-                    self.env.ref("account.data_account_type_liquidity").id,
+                    "asset_cash",
                 )
             ],
             limit=1,
@@ -69,14 +65,14 @@ class TestRibaCommon(common.TransactionCase):
                 "code": "STC",
                 "name": "STC Bills (test)",
                 "reconcile": True,
-                "user_type_id": self.account_user_type.id,
+                "account_type": "asset_receivable",
             }
         )
         self.riba_account = self.env["account.account"].create(
             {
                 "code": "C/O",
                 "name": "C/O Account (test)",
-                "user_type_id": self.account_asset_user_type.id,
+                "account_type": "asset_fixed",
             }
         )
         self.unsolved_account = self.env["account.account"].create(
@@ -84,7 +80,7 @@ class TestRibaCommon(common.TransactionCase):
                 "code": "Past Due",
                 "name": "Past Due Bills Account (test)",
                 "reconcile": True,
-                "user_type_id": self.account_user_type.id,
+                "account_type": "asset_receivable",
             }
         )
         self.company_bank = self.env.ref("l10n_it_ricevute_bancarie.company_bank")
@@ -108,7 +104,7 @@ class TestRibaCommon(common.TransactionCase):
             {
                 "code": "demo_due_cost",
                 "name": "cashing fees",
-                "user_type_id": self.env.ref("account.data_account_type_expenses").id,
+                "account_type": "expense",
             }
         )
 

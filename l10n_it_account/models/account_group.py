@@ -53,12 +53,12 @@ class AccountGroup(models.Model):
 
         for progenitor in self.browse(tuple(set(progenitor_ids))):
             accounts = progenitor.get_group_accounts()
-            # if not accounts.mapped("user_type_id").have_same_sign():
-            #     raise ValidationError(
-            #         _("Incoherent balance signs for '{}' and its subgroups.").format(
-            #             progenitor.name_get()[0][-1]
-            #         )
-            #     )
+            if not accounts.mapped("account_type").have_same_sign():
+                raise ValidationError(
+                    _("Incoherent balance signs for '{}' and its subgroups.").format(
+                        progenitor.name_get()[0][-1]
+                    )
+                )
 
     def _compute_account_balance_sign(self):
         for group in self:
@@ -67,8 +67,7 @@ class AccountGroup(models.Model):
     def get_account_balance_sign(self):
         self.ensure_one()
         progenitor = self.get_group_progenitor()
-        #types = progenitor.get_group_accounts().mapped("account_type")
-        types = progenitor.get_group_accounts().mapped("user_type_id")
+        types = progenitor.get_group_accounts().mapped("account_type")
         if types:
             return types[0].account_balance_sign
         return 1

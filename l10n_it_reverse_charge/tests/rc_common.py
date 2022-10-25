@@ -40,9 +40,9 @@ class ReverseChargeCommon(AccountTestInvoicingCommon):
             cls.env["account.account"].search(
                 [
                     (
-                        "user_type_id",
+                        "account_type",
                         "=",
-                        cls.env.ref("account.data_account_type_payable").id,
+                        "liability_payable",
                     )
                 ],
                 limit=1,
@@ -51,9 +51,9 @@ class ReverseChargeCommon(AccountTestInvoicingCommon):
         cls.invoice_line_account = cls.env["account.account"].search(
             [
                 (
-                    "user_type_id",
+                    "account_type",
                     "=",
-                    cls.env.ref("account.data_account_type_expenses").id,
+                    "expense",
                 )
             ],
             limit=1,
@@ -101,9 +101,7 @@ class ReverseChargeCommon(AccountTestInvoicingCommon):
             {
                 "code": "295000",
                 "name": "selfinvoice temporary",
-                "user_type_id": cls.env.ref(
-                    "account.data_account_type_current_liabilities"
-                ).id,
+                "account_type": "liability_current",
             }
         )
 
