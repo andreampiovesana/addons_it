@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="account_tax_import_wizard" model="ir.ui.view">
+        <field name="name">account.tax.import.wizard</field>
+        <field name="model">account.tax.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Account Tax">
+                <group>
+                    <field name="file" filename="name"/>
+                </group>
+                <footer>
+                    <button name="import_csv" string="Import" type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="account_tax_import_action" model="ir.actions.act_window">
+        <field name="name">Import Account Tax</field>
+        <field name="res_model">account.tax.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="account_tax_import_action_menu"
+              name="Import Account Tax"
+              parent="account.account_account_menu"
+              groups="account.group_account_manager"
+              sequence="33"
+              action="account_tax_import_action"
+    />
+
+</odoo>
+

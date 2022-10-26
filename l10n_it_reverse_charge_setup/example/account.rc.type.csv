@@ -1,0 +1,5 @@
+NAME;METHOD;DESCRIPTION;FISCAL_DOC;PARTNER_TYPE;PARTNER_RC;JOURNAL_RC;JOURNAL_PAY_RC;ACCOUNT_RC;TAX_ORIGINAL;TAX_PURCHASE;TAX_SALE
+Extra-EU Servizi (autofattura);selfinvoice;configurazione autofattura extra UE servizi;TD17;other;Openindustry.it S.a.s.;AUTOA;AUTOR;295000;22as;22aEUES;22vEUES
+Intra-EU Servizi (autofattura);selfinvoice;configurazione autofattura intra UE servizi;TD17;other;Openindustry.it S.a.s.;AUTOA;AUTOR;295000;22as;22aIUES;22vIUES
+Extra-EU Materiali (autofattura);selfinvoice;configurazione autofattura extra UE materiali;TD19;other;Openindustry.it S.a.s.;AUTOA;AUTOR;295000;22am;22aEUEM;22vEUEM
+Intra-EU Materiali (autofattura);selfinvoice;configurazione autofattura intra UE materiali;TD18;other;Openindustry.it S.a.s.;AUTOA;AUTOR;295000;22am;22aIUEM;22vIUEM

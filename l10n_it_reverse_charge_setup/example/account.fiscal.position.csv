@@ -1,0 +1,5 @@
+NAME;REVERSE_CHARGE;TAX;MAP_TAX
+Intra-UE acquisto materiali;Intra-EU Materiali (autofattura);22am;22aIUEM
+Intra-UE acquisto servizi;Intra-EU Servizi (autofattura);22as;22aIUES
+Extra-UE acquisto materiali (art.17c2);Extra-EU Materiali (autofattura);22am;22aEUEM
+Extra-UE acquisto servizi;Extra-EU Servizi (autofattura);22as;22aEUES

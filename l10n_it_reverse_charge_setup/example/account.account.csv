@@ -1,0 +1,3 @@
+NAME;CODE;TYPE;RECONCILE;INTERNAL_TYPE;INTERNAL_GROUP
+Autofatture;182007;Banca e cassa;False;liquidity;asset
+Transitorio Autofatture;295000;Passività correnti;False;other;liability

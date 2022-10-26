@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_account_import_wizard_user,account.account.import.wizard user,model_account_account_import_wizard,account.group_account_user,1,0,0,0
+access_account_account_import_wizard_manager,account.account.import.wizard manager,model_account_account_import_wizard,account.group_account_manager,1,1,1,1
+access_account_journal_import_wizard_user,account.journal.import.wizard user,model_account_journal_import_wizard,account.group_account_user,1,0,0,0
+access_account_journal_import_wizard_manager,account.journal.import.wizard manager,model_account_journal_import_wizard,account.group_account_manager,1,1,1,1
+access_account_tax_import_wizard_user,account.tax.import.wizard user,model_account_tax_import_wizard,account.group_account_user,1,0,0,0
+access_account_tax_import_wizard_manager,account.tax.import.wizard manager,model_account_tax_import_wizard,account.group_account_manager,1,1,1,1
+access_account_rctype_import_wizard_user,account.rctype.import.wizard user,model_account_rctype_import_wizard,account.group_account_user,1,0,0,0
+access_account_rctype_import_wizard_manager,account.rctype.import.wizard manager,model_account_rctype_import_wizard,account.group_account_manager,1,1,1,1
+access_account_fiscpos_import_wizard_user,account.fiscpos.import.wizard user,model_account_fiscpos_import_wizard,account.group_account_user,1,0,0,0
+access_account_fiscpos_import_wizard_manager,account.fiscpos.import.wizard manager,model_account_fiscpos_import_wizard,account.group_account_manager,1,1,1,1

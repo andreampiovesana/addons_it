@@ -1,0 +1,4 @@
+NAME;TYPE;CODE;DEFAULT_ACCOUNT
+Autofattura passiva;Acquisto;AUTOP;182007
+Autofattura attiva;Vendita;AUTOA;182007
+Transitorio autofatture;Banca;AUTOR;295000

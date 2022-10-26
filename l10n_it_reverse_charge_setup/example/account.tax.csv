@@ -1,0 +1,9 @@
+NAME;USE;SCOPE;DESCRIPTION;AMOUNT;AMOUNT_TYPE;ACCOUNT;REFUND;EXC_VAT;EXC_OPE;EXC_REG
+[22vIUES] iva 22%;Vendita;Servizi;22vIUES;22.0;Percentuale sul prezzo;260100;260100;False;True;False
+[22vIUEM] iva 22%;Vendita;Beni;22vIUEM;22.0;Percentuale sul prezzo;260100;260100;False;True;False
+[22aIUES] iva 22%;Acquisti;Servizi;22aIUES;22.0;Percentuale sul prezzo;160100;160100;False;False;False
+[22aIUEM] iva 22%;Acquisti;Beni;22aIUEM;22.0;Percentuale sul prezzo;160100;160100;False;False;False
+[22vEUES] iva 22%;Vendita;Servizi;22vEUES;22.0;Percentuale sul prezzo;260100;260100;False;True;False
+[22vEUEM] iva 22%;Vendita;Beni;22vEUEM;22.0;Percentuale sul prezzo;260100;260100;False;True;False
+[22aEUES] iva 22%;Acquisti;Servizi;22aEUES;22.0;Percentuale sul prezzo;160100;160100;False;False;False
+[22aEUEM] iva 22%;Acquisti;Beni;22aEUEM;22.0;Percentuale sul prezzo;160100;160100;False;False;False
