@@ -22,7 +22,7 @@ class TestIntrastat(AccountTestInvoicingCommon):
                 "code": "1",
                 "name": "Debtors - (test)",
                 "reconcile": True,
-                "user_type_id": cls.env.ref("account.data_account_type_receivable").id,
+                "account_type": "asset_receivable",
             }
         )
 
@@ -31,7 +31,7 @@ class TestIntrastat(AccountTestInvoicingCommon):
                 "code": "2",
                 "name": "Creditors - (test)",
                 "reconcile": True,
-                "user_type_id": cls.env.ref("account.data_account_type_payable").id,
+                "account_type": "liability_payable",
             }
         )
 

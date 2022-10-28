@@ -19,7 +19,7 @@ class TestIntrastatStatement(TransactionCase):
                 "code": "1",
                 "name": "Debtors - (test)",
                 "reconcile": True,
-                "user_type_id": self.env.ref("account.data_account_type_receivable").id,
+                "account_type": "asset_receivable",
             }
         )
         self.account_account_payable = self.account_account_model.create(
@@ -27,7 +27,7 @@ class TestIntrastatStatement(TransactionCase):
                 "code": "2",
                 "name": "Creditors - (test)",
                 "reconcile": True,
-                "user_type_id": self.env.ref("account.data_account_type_payable").id,
+                "account_type": "liability_payable",
             }
         )
 

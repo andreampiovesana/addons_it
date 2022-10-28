@@ -26,7 +26,6 @@ class AccountAccountImportWizard(models.TransientModel):
 
     def import_csv(self):
         aa = self.env['account.account']
-        aat = self.env['account.account.type']
         # import
         nr = 0
         file_to_import = base64.b64decode(self.file)
@@ -49,19 +48,11 @@ class AccountAccountImportWizard(models.TransientModel):
             )
             if account_id:
                 continue
-            # type
-            user_type_id = aat.search(
-                [('name', '=', type)],
-                limit=1,
-            )
-            if not user_type_id:
-                message = str(nr) + " error account type " + type
-                raise UserError(message)
             # import
             account_data = {
                 "code": code,
                 "name": name,
-                "user_type_id": user_type_id.id,
+                "account_type": type,
                 "reconcile": reco,
                 "internal_type": intt,
                 "internal_group": intg,

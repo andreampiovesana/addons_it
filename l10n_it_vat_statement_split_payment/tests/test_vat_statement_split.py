@@ -50,9 +50,9 @@ class TestTaxSP(AccountTestInvoicingCommon):
             .search(
                 [
                     (
-                        "user_type_id",
+                        "account_type",
                         "=",
-                        cls.env.ref("account.data_account_type_current_assets").id,
+                        "asset_current",
                     )
                 ],
                 limit=1,
@@ -64,9 +64,9 @@ class TestTaxSP(AccountTestInvoicingCommon):
             .search(
                 [
                     (
-                        "user_type_id",
+                        "account_type",
                         "=",
-                        cls.env.ref("account.data_account_type_current_liabilities").id,
+                        "liability_current",
                     )
                 ],
                 limit=1,
@@ -129,9 +129,9 @@ class TestTaxSP(AccountTestInvoicingCommon):
         cls.company.sp_account_id = cls.env["account.account"].search(
             [
                 (
-                    "user_type_id",
+                    "account_type",
                     "=",
-                    cls.env.ref("account.data_account_type_current_assets").id,
+                    "asset_current",
                 )
             ],
             limit=1,
@@ -140,16 +140,16 @@ class TestTaxSP(AccountTestInvoicingCommon):
             dict(
                 code="cust_acc",
                 name="customer account",
-                user_type_id=account_user_type.id,
+                account_type=account_user_type.id,
                 reconcile=True,
             )
         )
         cls.a_sale = cls.env["account.account"].search(
             [
                 (
-                    "user_type_id",
+                    "account_type",
                     "=",
-                    cls.env.ref("account.data_account_type_revenue").id,
+                    "income",
                 )
             ],
             limit=1,
@@ -159,7 +159,7 @@ class TestTaxSP(AccountTestInvoicingCommon):
                 "code": "VAT AUTH",
                 "name": "VAT Authority",
                 "reconcile": True,
-                "user_type_id": cls.env.ref("account.data_account_type_payable").id,
+                "account_type": "liability_payable",
             }
         )
 
@@ -252,12 +252,11 @@ class TestTaxSP(AccountTestInvoicingCommon):
         self.assertEqual(self.vat_statement.generic_vat_account_line_ids.amount, 22.0)
 
     def test_account_sp_company(self):
-        account_user_type = self.env.ref("account.data_account_type_receivable")
         account_sp = self.account_model.create(
             dict(
                 code="split_payment_acc",
                 name="Split payment account",
-                user_type_id=account_user_type.id,
+                account_type="asset_receivable",
                 reconcile=True,
             )
         )
