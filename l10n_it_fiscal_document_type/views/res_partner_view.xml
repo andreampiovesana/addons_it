@@ -9,13 +9,21 @@
                 expr="//field[@name='property_payment_term_id']"
                 position="before"
             >
-                        <field name="out_fiscal_document_type" class="oe_inline" />
+                        <field
+                    name="out_fiscal_document_type"
+                    class="oe_inline"
+                    groups="account.group_account_invoice"
+                />
                 </xpath>
                 <xpath
                 expr="//field[@name='property_supplier_payment_term_id']"
                 position="before"
             >
-                        <field name="in_fiscal_document_type" class="oe_inline" />
+                        <field
+                    name="in_fiscal_document_type"
+                    class="oe_inline"
+                    groups="account.group_account_invoice"
+                />
                 </xpath>
             </field>
         </record>

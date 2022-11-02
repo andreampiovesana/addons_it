@@ -18,11 +18,12 @@ def pre_init_hook(cr):
         "ALTER TABLE account_move ADD COLUMN IF NOT EXISTS financial_type VARCHAR"
     )
     MAPPING = [
-        ("liquidity", "liquidity", False),
-        ("payable", "payable", "AND aml.balance < 0"),
-        ("payable_refund", "payable", "AND aml.balance >= 0"),
-        ("receivable", "receivable", "AND aml.balance > 0"),
-        ("receivable_refund", "receivable", "AND aml.balance <= 0"),
+        ("liquidity", "asset_cash", False),
+        ("liquidity", "liability_credit_card", False),
+        ("payable", "liability_payable", "AND aml.balance < 0"),
+        ("payable_refund", "liability_payable", "AND aml.balance >= 0"),
+        ("receivable", "asset_receivable", "AND aml.balance > 0"),
+        ("receivable_refund", "asset_receivable", "AND aml.balance <= 0"),
         ("other", False, False),
     ]
     for financial_type, account_type, extra_where in MAPPING:
@@ -33,7 +34,7 @@ def pre_init_hook(cr):
                 """FROM account_move_line aml
                 WHERE aml.account_id IN (
                     SELECT id FROM account_account
-                    WHERE account_type= %s)
+                    WHERE account_type = %s)
                 AND aml.move_id = am.id AND am.financial_type IS NULL
                 """
             )

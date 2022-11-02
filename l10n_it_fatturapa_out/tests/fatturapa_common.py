@@ -30,7 +30,6 @@ class FatturaPACommon(AccountTestInvoicingCommon):
         self.company.e_invoice_transmitter_id = self.company.partner_id.id
 
         self.wizard_model = self.env["wizard.export.fatturapa"]
-        self.data_model = self.env["ir.model.data"]
         self.attach_model = self.env["fatturapa.attachment.out"]
         self.invoice_model = self.env["account.move"]
         self.fatturapa_attach = self.env["fatturapa.attachments"]
@@ -41,21 +40,14 @@ class FatturaPACommon(AccountTestInvoicingCommon):
         )[0]
         self.a_recv = self.account_model.with_user(self.account_manager.id).create(
             dict(
-                code="cust_acc",
+                code="cust.acc",
                 name="customer account",
                 account_type="asset_receivable",
                 reconcile=True,
             )
         )
         self.a_sale = self.env["account.account"].search(
-            [
-                (
-                    "account_type",
-                    "=",
-                    "income",
-                )
-            ],
-            limit=1,
+            [("account_type", "=", "income")], limit=1
         )
         self.account_payment_term = self.env.ref(
             "account.account_payment_term_end_following_month"
@@ -156,7 +148,7 @@ class FatturaPACommon(AccountTestInvoicingCommon):
         )
         self.trasmittente = self.env.ref("l10n_it_fatturapa.res_partner_fatturapa_1")
         # Otherwise self.company in cache could keep the old wrong value USD
-        self.company.refresh()
+        self.company.invalidate_recordset()
 
     def AttachFileToInvoice(self, InvoiceId, filename):
         self.fatturapa_attach.create(
@@ -189,7 +181,7 @@ class FatturaPACommon(AccountTestInvoicingCommon):
 
     def run_wizard(self, invoice_id):
         wizard = self.wizard_model.create({})
-        return wizard.with_context({"active_ids": [invoice_id]}).exportFatturaPA()
+        return wizard.with_context(active_ids=invoice_id).exportFatturaPA()
 
     def set_e_invoice_file_id(self, e_invoice, file_name):
         # We need this because file name is random and we can't predict it

@@ -94,7 +94,8 @@ class WizardExportFatturapa(models.TransientModel):
 
         payments = []
         for line in invoice.line_ids.filtered(
-            lambda line: line.account_id.account_type in ("asset_receivable", "liability_payable")
+            lambda line: line.account_id.account_type
+            in ("asset_receivable", "liability_payable")
         ):
             payments.append(
                 _Payment(line.date_maturity, line.amount_currency, line.debit)
@@ -233,7 +234,9 @@ class WizardExportFatturapa(models.TransientModel):
         EFatturaOut = self._get_efattura_class()
 
         progressivo_invio = self.setProgressivoInvio(attach)
-        invoice_ids = self.env["account.move"].with_context(context).browse(invoice_ids)
+        invoice_ids = (
+            self.env["account.move"].with_context(**context).browse(invoice_ids)
+        )
         invoice_ids.preventive_checks()
 
         # generate attachments (PDF version of invoice)
