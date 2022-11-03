@@ -2,11 +2,12 @@
 # Copyright 2015 innoviu Srl <http://www.innoviu.com>
 # Copyright 2018 Lorenzo Battistini
 # Copyright 2018 Sergio Zanchetta (Associazione PNLUG - Gruppo Odoo)
+# Copyright 2022 Marco Colombo (<marco.colombo@phi.technology>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "ITA - Fattura elettronica - Ricezione",
-    "version": "16.0.1.4.2",
+    "version": "16.0.1.0.0",
     "development_status": "Beta",
     "category": "Localization/Italy",
     "summary": "Ricezione fatture elettroniche",
@@ -14,7 +15,6 @@
     "website": "https://github.com/OCA/l10n-italy" "l10n_it_fatturapa_in",
     "license": "AGPL-3",
     "depends": [
-        "base_vat",
         "l10n_it_fatturapa",
         "l10n_it_fiscal_document_type",
         "l10n_it_withholding_tax_reason",

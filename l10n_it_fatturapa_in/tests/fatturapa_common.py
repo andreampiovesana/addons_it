@@ -134,10 +134,9 @@ class FatturapaCommon(SingleTransactionCase):
     def create_attachment(self, name, file_name, module_name=None):
         if module_name is None:
             module_name = "l10n_it_fatturapa_in"
-        attach_form = Form(self.attach_model)
-        attach_form.name = name
-        attach_form.datas = self.getFile(file_name, module_name=module_name)[1]
-        attach = attach_form.save()
+        attach = self.attach_model.create(
+            {"name": name, "datas": self.getFile(file_name, module_name=module_name)[1]}
+        )
         return attach
 
     def run_wizard(
@@ -195,7 +194,6 @@ class FatturapaCommon(SingleTransactionCase):
         super(FatturapaCommon, self).setUp()
         self.wizard_model = self.env["wizard.import.fatturapa"]
         self.wizard_link_model = self.env["wizard.link.to.invoice"]
-        self.data_model = self.env["ir.model.data"]
         self.attach_model = self.env["fatturapa.attachment.in"]
         self.invoice_model = self.env["account.move"]
         self.payable_account_id = (
@@ -218,13 +216,7 @@ class FatturapaCommon(SingleTransactionCase):
         arrotondamenti_attivi_account_id = (
             self.env["account.account"]
             .search(
-                [
-                    (
-                        "account_type",
-                        "=",
-                        "income_other",
-                    )
-                ],
+                [("account_type", "=", "income_other")],
                 limit=1,
             )
             .id
