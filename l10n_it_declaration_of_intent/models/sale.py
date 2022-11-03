@@ -19,12 +19,6 @@ class SaleOrder(models.Model):
                 if declarations:
                     sale.fiscal_position_id = declarations[0].fiscal_position_id.id
 
-    @api.onchange("date_order")
+    @api.onchange("date_order", "partner_id")
     def onchange_date_order(self):
-        self._set_fiscal_position()
-
-    @api.onchange("partner_id")
-    def onchange_partner_id(self):
-        res = super(SaleOrder, self).onchange_partner_id()
-        self._set_fiscal_position()
-        return res
+        self._compute_fiscal_position_id()
