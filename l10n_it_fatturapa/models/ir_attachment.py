@@ -116,4 +116,4 @@ class Attachment(models.Model):
         dom = ET.parse(xml_file, parser=recovering_parser)
         transform = ET.XSLT(xslt)
         newdom = transform(dom)
-        return ET.tostring(newdom, pretty_print=True)
+        return ET.tostring(newdom, pretty_print=True, encoding="unicode")
