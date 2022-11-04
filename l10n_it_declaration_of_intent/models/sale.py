@@ -21,4 +21,4 @@ class SaleOrder(models.Model):
 
     @api.onchange("date_order", "partner_id")
     def onchange_date_order(self):
-        self._compute_fiscal_position_id()
+        self._set_fiscal_position()
